@@ -1,0 +1,48 @@
+<UserControl x:Class="Toolbox.FileHashWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource CardBorder}" Margin="0,0,0,14" Padding="14,10">
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="FilePath" Width="420" Margin="0,0,10,0" Padding="8,6" Style="{StaticResource ModernTextBox}"/>
+                <Button Content="浏览" Click="BtnBrowse_Click" Margin="0,0,10,0" Style="{StaticResource BtnSecondary}"/>
+                <Button Content="计算哈希" Click="BtnCalculate_Click" Style="{StaticResource PrimaryButton}"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}" Margin="0,0,0,12" Padding="14">
+            <StackPanel>
+                <TextBlock Text="MD5" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,6"/>
+                <TextBox x:Name="MD5Result" IsReadOnly="True" Padding="8,6" FontFamily="Consolas" FontSize="13" Style="{StaticResource ModernTextBox}" Background="{DynamicResource BackgroundHoverBrush}"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" Style="{StaticResource CardBorder}" Margin="0,0,0,12" Padding="14">
+            <StackPanel>
+                <TextBlock Text="SHA1" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,6"/>
+                <TextBox x:Name="SHA1Result" IsReadOnly="True" Padding="8,6" FontFamily="Consolas" FontSize="13" Style="{StaticResource ModernTextBox}" Background="{DynamicResource BackgroundHoverBrush}"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="3" Style="{StaticResource CardBorder}" Margin="0,0,0,12" Padding="14">
+            <StackPanel>
+                <TextBlock Text="SHA256" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,6"/>
+                <TextBox x:Name="SHA256Result" IsReadOnly="True" Padding="8,6" FontFamily="Consolas" FontSize="13" Style="{StaticResource ModernTextBox}" Background="{DynamicResource BackgroundHoverBrush}"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,0,0,0">
+            <Button Content="复制 MD5" Click="BtnCopyMD5_Click" Margin="0,0,10,0" Style="{StaticResource BtnSecondary}"/>
+            <Button Content="复制 SHA1" Click="BtnCopySHA1_Click" Margin="0,0,10,0" Style="{StaticResource BtnSecondary}"/>
+            <Button Content="复制 SHA256" Click="BtnCopySHA256_Click" Style="{StaticResource BtnSecondary}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

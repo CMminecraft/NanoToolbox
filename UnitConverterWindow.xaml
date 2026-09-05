@@ -1,0 +1,42 @@
+<UserControl x:Class="Toolbox.UnitConverterWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource CardBorder}" Margin="0,0,0,14" Padding="14,10">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="类型：" FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <ComboBox x:Name="CategoryCombo" Width="160" Height="32" Style="{StaticResource ModernComboBox}" SelectionChanged="CategoryCombo_SelectionChanged">
+                    <ComboBoxItem Content="长度"/>
+                    <ComboBoxItem Content="重量"/>
+                    <ComboBoxItem Content="面积"/>
+                    <ComboBoxItem Content="温度"/>
+                </ComboBox>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}" Margin="0,0,0,14" Padding="14">
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="InputValue" Width="120" Text="1" Padding="8,6" Style="{StaticResource ModernTextBox}"/>
+                <ComboBox x:Name="FromUnit" Width="140" Height="32" Style="{StaticResource ModernComboBox}" Margin="10,0,0,0"/>
+                <TextBlock Text="→" FontSize="18" Margin="14,0,14,0" VerticalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                <ComboBox x:Name="ToUnit" Width="140" Height="32" Style="{StaticResource ModernComboBox}"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" Style="{StaticResource CardBorder}" Margin="0,0,0,14" Padding="14">
+            <StackPanel>
+                <TextBlock Text="结果" FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,4"/>
+                <TextBox x:Name="Result" IsReadOnly="True" FontSize="20" FontWeight="SemiBold" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource TextPrimaryBrush}" Padding="0"/>
+            </StackPanel>
+        </Border>
+
+        <Button Grid.Row="3" Content="转换" Click="BtnConvert_Click" HorizontalAlignment="Right" Style="{StaticResource PrimaryButton}" Padding="20,8"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,165 @@
+<UserControl x:Class="Toolbox.BatchRenameWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 顶部标题（图标 + 工具名） -->
+        <Border Grid.Row="0" Margin="0,0,0,14">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="LogoImage" Width="40" Height="40"
+                       RenderOptions.BitmapScalingMode="HighQuality"
+                       VerticalAlignment="Center" Margin="0,0,12,0"/>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock x:Name="TitleText" Text="批量重命名" FontSize="18" FontWeight="Bold"
+                               Foreground="{DynamicResource TextPrimaryBrush}"/>
+                    <TextBlock x:Name="SubtitleText" Text="按规则批量改名：前缀 / 后缀 / 序号 / 替换 / 正则" FontSize="11"
+                               Foreground="{DynamicResource TextTertiaryBrush}" Margin="0,2,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- 文件夹选择 -->
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}" Margin="0,0,0,14" Padding="16,14">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="文件夹" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBox x:Name="FolderInput" Grid.Column="1" Height="34" Padding="10,0" VerticalContentAlignment="Center" Style="{StaticResource ModernTextBox}"/>
+                    <Button x:Name="BtnBrowseFolder" Grid.Column="2" Content="浏览" Click="BtnBrowseFolder_Click" Style="{StaticResource BtnSecondary}" Margin="10,0,0,0"/>
+                </Grid>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Text="文件类型" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <ComboBox x:Name="FileTypeFilter" Width="120" Height="30" SelectionChanged="FileTypeFilter_Changed">
+                        <ComboBoxItem Content="全部" IsSelected="True"/>
+                        <ComboBoxItem Content="图片"/>
+                        <ComboBoxItem Content="文档"/>
+                        <ComboBoxItem Content="视频"/>
+                        <ComboBoxItem Content="音频"/>
+                        <ComboBoxItem Content="代码"/>
+                    </ComboBox>
+                    <TextBlock x:Name="FileCountText" Text="共 0 个文件" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="14,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- 规则 -->
+        <Border Grid.Row="2" Style="{StaticResource CardBorder}" Margin="0,0,0,14" Padding="16,14">
+            <StackPanel>
+                <TextBlock Text="命名规则" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,10"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="添加前缀" FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,4"/>
+                    <TextBox x:Name="PrefixInput" Grid.Row="0" Grid.Column="1" Height="32" Padding="10,0" VerticalContentAlignment="Center" Style="{StaticResource ModernTextBox}" Margin="0,4" TextChanged="OnRuleChanged"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="添加后缀" FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,4"/>
+                    <TextBox x:Name="SuffixInput" Grid.Row="1" Grid.Column="1" Height="32" Padding="10,0" VerticalContentAlignment="Center" Style="{StaticResource ModernTextBox}" Margin="0,4" TextChanged="OnRuleChanged"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="序号" FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,4"/>
+                    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="0,4">
+                        <CheckBox x:Name="NumberingEnabled" Content="启用" VerticalAlignment="Center" Margin="0,0,12,0" Checked="OnRuleChanged" Unchecked="OnRuleChanged"/>
+                        <TextBlock Text="起始" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                        <TextBox x:Name="NumStart" Width="60" Height="30" Padding="6,0" VerticalContentAlignment="Center" Style="{StaticResource ModernTextBox}" Text="1" TextChanged="OnRuleChanged"/>
+                        <TextBlock Text="步长" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="14,0,6,0"/>
+                        <TextBox x:Name="NumStep" Width="60" Height="30" Padding="6,0" VerticalContentAlignment="Center" Style="{StaticResource ModernTextBox}" Text="1" TextChanged="OnRuleChanged"/>
+                        <TextBlock Text="位数" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="14,0,6,0"/>
+                        <TextBox x:Name="NumWidth" Width="50" Height="30" Padding="6,0" VerticalContentAlignment="Center" Style="{StaticResource ModernTextBox}" Text="2" TextChanged="OnRuleChanged"/>
+                        <TextBlock Text="位置" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="14,0,6,0"/>
+                        <ComboBox x:Name="NumPosition" Width="100" Height="30" SelectionChanged="OnRuleChanged">
+                            <ComboBoxItem Content="前面" IsSelected="True"/>
+                            <ComboBoxItem Content="后面"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="查找替换" FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,4"/>
+                    <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="0,4">
+                        <TextBox x:Name="FindText" Width="180" Height="30" Padding="6,0" VerticalContentAlignment="Center" Style="{StaticResource ModernTextBox}" TextChanged="OnRuleChanged"/>
+                        <TextBlock Text="→" FontSize="14" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="8,0"/>
+                        <TextBox x:Name="ReplaceText" Width="180" Height="30" Padding="6,0" VerticalContentAlignment="Center" Style="{StaticResource ModernTextBox}" TextChanged="OnRuleChanged"/>
+                        <CheckBox x:Name="RegexEnabled" Content="正则" VerticalAlignment="Center" Margin="12,0,0,0" Checked="OnRuleChanged" Unchecked="OnRuleChanged"/>
+                        <CheckBox x:Name="MatchExtEnabled" Content="仅替换文件名" VerticalAlignment="Center" Margin="12,0,0,0" IsChecked="True" Checked="OnRuleChanged" Unchecked="OnRuleChanged"/>
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="文件类型筛选" FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,4"/>
+                    <TextBox x:Name="ExtFilter" Grid.Row="4" Grid.Column="1" Height="30" Padding="10,0" VerticalContentAlignment="Center" Style="{StaticResource ModernTextBox}" Margin="0,4" ToolTip="用逗号分隔，如 jpg,png" TextChanged="OnRuleChanged"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- 预览列表 -->
+        <Border Grid.Row="3" Style="{StaticResource CardBorder}" Padding="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Padding="14,10" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource BorderBrush}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="原文件名" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock Grid.Column="1" Text="新文件名" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock Grid.Column="2" Text="状态" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Width="100"/>
+                    </Grid>
+                </Border>
+                <ListBox x:Name="PreviewList" Grid.Row="1" BorderThickness="0" Background="Transparent"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,4,0,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding OriginalName}" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" TextTrimming="CharacterEllipsis" Margin="14,0,8,0"/>
+                                <TextBlock Grid.Column="1" Text="{Binding NewName}" FontSize="12" Foreground="{DynamicResource TextPrimaryBrush}" TextTrimming="CharacterEllipsis" Margin="0,0,8,0"/>
+                                <TextBlock Grid.Column="2" Text="{Binding StatusText}" FontSize="12" Foreground="{DynamicResource AccentTealBrush}" TextAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Border>
+
+        <!-- 底部操作 -->
+        <Border Grid.Row="4" Style="{StaticResource CardBorder}" Margin="0,14,0,0" Padding="16,14">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="BtnRefresh" Content="刷新预览" Click="BtnRefresh_Click" Style="{StaticResource BtnSecondary}" Margin="0,0,10,0"/>
+                <Button x:Name="BtnApply" Content="应用重命名" Click="BtnApply_Click" Style="{StaticResource PrimaryButton}" Margin="0,0,10,0"/>
+                <TextBlock x:Name="ApplyStatus" Text="" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,35 @@
+<UserControl x:Class="Toolbox.ProcessManagerWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource CardBorder}" Margin="0,0,0,14" Padding="14,10">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="刷新" Click="BtnRefresh_Click" Margin="0,0,10,0" Style="{StaticResource BtnSecondary}"/>
+                <TextBox x:Name="SearchBox" Width="240" Padding="8,6" Style="{StaticResource ModernTextBox}"/>
+                <TextBlock Text="（每 2 秒自动刷新 CPU）" FontSize="12" Foreground="{DynamicResource TextTertiaryBrush}" VerticalAlignment="Center" Margin="14,0,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}" Padding="0">
+            <DataGrid x:Name="ProcessGrid" Style="{StaticResource ModernDataGrid}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="进程名称" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="PID" Binding="{Binding Id}" Width="100"/>
+                    <DataGridTextColumn Header="内存(MB)" Binding="{Binding Memory, StringFormat={}{0:0.0}}" Width="120"/>
+                    <DataGridTextColumn Header="CPU(%)" Binding="{Binding Cpu, StringFormat={}{0:0.0}}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
+            <Button Content="打开文件位置" Click="BtnOpenFolder_Click" Margin="0,0,10,0" Style="{StaticResource BtnSecondary}"/>
+            <Button Content="结束进程" Click="BtnKill_Click" Style="{StaticResource PrimaryButton}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

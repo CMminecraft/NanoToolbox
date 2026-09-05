@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>Toolbox</RootNamespace>
+    <AssemblyName>Toolbox</AssemblyName>
+    <UseWPF>true</UseWPF>
+    <LangVersion>8.0</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <!-- 图标、主题、应用图标全部嵌入 exe，实现单文件运行 -->
+  <ItemGroup>
+    <Resource Include="Icons\**\*.png" />
+    <Resource Include="IconPack\**\*.svg" />
+    <Resource Include="Themes\**\*.xaml" />
+    <Resource Include="AppIcon.ico" />
+  </ItemGroup>
+
+  <!-- 防御性排除：避免 obj/bin 等生成目录被默认编译 glob 误包含 -->
+  <ItemGroup>
+    <Compile Remove="obj\**\*.cs" />
+    <Compile Remove="bin\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+</Project>

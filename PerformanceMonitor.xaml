@@ -1,0 +1,79 @@
+<UserControl x:Class="Toolbox.PerformanceMonitor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Background="{DynamicResource BackgroundCardBrush}"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="1"
+            CornerRadius="12"
+            Padding="12,10">
+        <StackPanel>
+            <!-- CPU -->
+            <Grid Margin="0,0,0,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Width="22" Height="22" CornerRadius="6" Background="{DynamicResource PrimaryBrush}" Opacity="0.18" VerticalAlignment="Center">
+                    <TextBlock Text="C" FontSize="11" FontWeight="Bold" Foreground="{DynamicResource PrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <TextBlock Grid.Column="1" Text="CPU" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                <TextBlock x:Name="CpuValue" Grid.Column="2" Text="--" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+            </Grid>
+            <ProgressBar x:Name="CpuBar" Height="5" Maximum="100" Value="0" Margin="0,0,0,10"
+                         Foreground="{DynamicResource PrimaryBrush}"
+                         Background="{DynamicResource BorderLightBrush}"
+                         BorderThickness="0"/>
+
+            <!-- 内存 -->
+            <Grid Margin="0,0,0,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Width="22" Height="22" CornerRadius="6" Background="{DynamicResource AccentTealBrush}" Opacity="0.22" VerticalAlignment="Center">
+                    <TextBlock Text="M" FontSize="11" FontWeight="Bold" Foreground="{DynamicResource AccentTealBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <TextBlock Grid.Column="1" Text="内存" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                <TextBlock x:Name="MemValue" Grid.Column="2" Text="--" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+            </Grid>
+            <ProgressBar x:Name="MemBar" Height="5" Maximum="100" Value="0" Margin="0,0,0,10"
+                         Foreground="{DynamicResource AccentTealBrush}"
+                         Background="{DynamicResource BorderLightBrush}"
+                         BorderThickness="0"/>
+
+            <!-- 磁盘 -->
+            <Grid Margin="0,0,0,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Width="22" Height="22" CornerRadius="6" Background="{DynamicResource AccentOrangeBrush}" Opacity="0.22" VerticalAlignment="Center">
+                    <TextBlock Text="D" FontSize="11" FontWeight="Bold" Foreground="{DynamicResource AccentOrangeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <TextBlock Grid.Column="1" Text="磁盘" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                <TextBlock x:Name="DiskValue" Grid.Column="2" Text="--" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+            </Grid>
+            <ProgressBar x:Name="DiskBar" Height="5" Maximum="100" Value="0" Margin="0,0,0,10"
+                         Foreground="{DynamicResource AccentOrangeBrush}"
+                         Background="{DynamicResource BorderLightBrush}"
+                         BorderThickness="0"/>
+
+            <!-- 网络 -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Width="22" Height="22" CornerRadius="6" Background="{DynamicResource AccentPurpleBrush}" Opacity="0.22" VerticalAlignment="Center">
+                    <TextBlock Text="N" FontSize="11" FontWeight="Bold" Foreground="{DynamicResource AccentPurpleBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <TextBlock Grid.Column="1" Text="网络" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                <TextBlock x:Name="NetValue" Grid.Column="2" Text="--" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</UserControl>

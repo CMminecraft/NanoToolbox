@@ -1,0 +1,37 @@
+# ===== Visual Studio / .NET 忽略规则 =====
+
+# 用户级文件
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# 编译产物（必须忽略）
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# Visual Studio 缓存目录
+.vs/
+
+# JetBrains Rider
+.idea/
+
+# 备份 / 日志文件
+*.bak
+*~
+@*AutomationLog.txt
+
+# NuGet 包（用 PackageReference，从 NuGet 还原，不入库）
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/repositories.config
+
+# Windows 缩略图缓存
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ReSharper
+_ReSharper*/

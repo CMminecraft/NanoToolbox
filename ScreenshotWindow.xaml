@@ -1,0 +1,48 @@
+<UserControl x:Class="Toolbox.ScreenshotWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBlock Text="截图工具" FontSize="20" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,6"/>
+        <TextBlock Text="选择一种截图方式，截图会复制到剪贴板。" FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,18"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="14"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="14"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="BtnFullScreen" Grid.Column="0" Click="BtnFullScreen_Click" Style="{StaticResource ToolTile}" Height="100" HorizontalContentAlignment="Stretch">
+                <StackPanel Margin="16">
+                    <TextBlock Text="全屏截图" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                    <TextBlock Text="截取整个屏幕" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,6,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="BtnRegion" Grid.Column="2" Click="BtnRegion_Click" Style="{StaticResource ToolTile}" Height="100" HorizontalContentAlignment="Stretch">
+                <StackPanel Margin="16">
+                    <TextBlock Text="区域截图" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                    <TextBlock Text="鼠标拖选区域" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,6,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="BtnWindow" Grid.Column="4" Click="BtnWindow_Click" Style="{StaticResource ToolTile}" Height="100" HorizontalContentAlignment="Stretch">
+                <StackPanel Margin="16">
+                    <TextBlock Text="窗口截图" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                    <TextBlock Text="点击目标窗口" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,6,0,0"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <Border Margin="0,20,0,0" Padding="14" CornerRadius="12" Background="{DynamicResource BackgroundHoverBrush}">
+            <StackPanel>
+                <TextBlock Text="小贴士" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,6"/>
+                <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}">
+                    截图后图片会自动复制到剪贴板，可在任意位置（如聊天、绘图软件）粘贴使用。
+                </TextBlock>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>

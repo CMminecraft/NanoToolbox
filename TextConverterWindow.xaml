@@ -1,0 +1,35 @@
+<UserControl x:Class="Toolbox.TextConverterWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource CardBorder}" Margin="0,0,0,14" Padding="14,10">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="转大写" Click="BtnToUpper_Click" Margin="0,0,8,0" Style="{StaticResource BtnSecondary}"/>
+                <Button Content="转小写" Click="BtnToLower_Click" Margin="0,0,8,0" Style="{StaticResource BtnSecondary}"/>
+                <Button Content="首字母大写" Click="BtnCapitalize_Click" Margin="0,0,8,0" Style="{StaticResource BtnSecondary}"/>
+                <Button Content="移除空格" Click="BtnRemoveSpaces_Click" Margin="0,0,8,0" Style="{StaticResource BtnSecondary}"/>
+                <Button Content="反转文本" Click="BtnReverse_Click" Style="{StaticResource BtnSecondary}"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}" Padding="0">
+            <TextBox x:Name="InputText"
+                     AcceptsReturn="True" AcceptsTab="True"
+                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                     FontFamily="Consolas" FontSize="13" Padding="14"
+                     BorderThickness="0" Background="Transparent" Foreground="{DynamicResource TextPrimaryBrush}"
+                     TextWrapping="Wrap"/>
+        </Border>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
+            <Button Content="复制结果" Click="BtnCopy_Click" Margin="0,0,10,0" Style="{StaticResource BtnSecondary}"/>
+            <Button Content="清空" Click="BtnClear_Click" Style="{StaticResource BtnSecondary}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

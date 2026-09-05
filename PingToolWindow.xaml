@@ -1,0 +1,33 @@
+<UserControl x:Class="Toolbox.PingToolWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource CardBorder}" Margin="0,0,0,14" Padding="14,10">
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="HostInput" Width="260" Text="www.baidu.com" Margin="0,0,10,0" Padding="8,6" Style="{StaticResource ModernTextBox}"/>
+                <Button x:Name="BtnPing" Content="开始 Ping" Click="BtnPing_Click" Margin="0,0,10,0" Style="{StaticResource PrimaryButton}"/>
+                <Button x:Name="BtnStop" Content="停止" Click="BtnStop_Click" Style="{StaticResource BtnSecondary}"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Style="{StaticResource CardBorder}" Padding="0">
+            <TextBox x:Name="ResultBox" IsReadOnly="True"
+                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                     FontFamily="Consolas" FontSize="12" Padding="14"
+                     BorderThickness="0" Background="Transparent" Foreground="{DynamicResource TextPrimaryBrush}"/>
+        </Border>
+
+        <Border Grid.Row="2" Style="{StaticResource CardBorder}" Margin="0,14,0,0" Padding="14,10">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="平均延迟: " FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                <TextBlock x:Name="AvgLatency" Text="--" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
